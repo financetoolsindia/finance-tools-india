@@ -281,7 +281,7 @@ footer{background:var(--navy);color:#fff;padding:44px 0 22px}.footer-grid{displa
       <div class="field"><label>Tax regime</label><select id="taxRegime"><option value="new">New regime — AY 2026–27</option><option value="old">Old regime — under 60</option></select></div>
       <button class="btn" style="width:100%" onclick="calcTax()">Calculate Tax</button>
       <div class="breakdown"><div class="line"><span>Income tax</span><span id="taxBase">₹0</span></div><div class="line"><span>87A rebate</span><span id="taxRebate">₹0</span></div><div class="line"><span>Marginal relief</span><span id="taxMarginalRelief">₹0</span></div><div class="line"><span>4% cess</span><span id="taxCess">₹0</span></div><div class="line total"><span>Estimated tax</span><span id="taxOut">₹0</span></div></div>
-      <p class="note">AY 2026–27 slabs are for a resident individual under the selected regime. New-regime 87A rebate and marginal relief are included; special-rate income and surcharge are excluded.</p>
+      <p class="note">AY 2026–27 slabs are for an individual under the selected regime. New-regime 87A rebate, marginal relief and 4% health & education cess are included; special-rate income and surcharge are excluded.</p>
     </div>
 
     <div class="panel" id="pf">
@@ -435,26 +435,34 @@ function calcFD(){
 function slabTax(income,slabs){
   let tax=0,prev=0;
   for(const [limit,rate] of slabs){
-    if(income<=prev)break;
-    tax+=Math.max(0,Math.min(income,limit)-prev)*rate;
+    if(income<=prev) break;
+    const taxable=Math.max(0,Math.min(income,limit)-prev);
+    tax+=taxable*rate;
     prev=limit;
-    if(limit===Infinity)break;
+    if(limit===Infinity) break;
   }
   return tax;
 }
+
 function calcTax(){
   const income=num("taxIncome");
   const regime=document.getElementById("taxRegime").value;
 
-  // Indicative slabs for AY 2026-27.
-  const slabs=regime==="new"
-    ? [[400000,0],[800000,.05],[1200000,.10],[1600000,.15],[2000000,.20],[2400000,.25],[Infinity,.30]]
+  // AY 2026-27: individual tax slabs.
+  // New regime: 0–4L nil, 4–8L 5%, 8–12L 10%,
+  // 12–16L 15%, 16–20L 20%, 20–24L 25%, above 24L 30%.
+  // Old regime: below 60 years — 0–2.5L nil, 2.5–5L 5%,
+  // 5–10L 20%, above 10L 30%.
+  const slabs = regime==="new"
+    ? [[400000,0],[800000,.05],[1200000,.10],[1600000,.15],
+       [2000000,.20],[2400000,.25],[Infinity,.30]]
     : [[250000,0],[500000,.05],[1000000,.20],[Infinity,.30]];
 
   const base=slabTax(income,slabs);
 
-  // Section 87A rebate: new regime up to ₹12 lakh taxable income;
-  // old regime up to ₹5 lakh taxable income.
+  // Section 87A rebate for AY 2026-27.
+  // New regime: resident individual, taxable income up to ₹12 lakh,
+  // maximum rebate ₹60,000. Old regime: up to ₹5 lakh, maximum ₹12,500.
   let rebate=0;
   if(regime==="new" && income<=1200000){
     rebate=Math.min(base,60000);
@@ -462,12 +470,12 @@ function calcTax(){
     rebate=Math.min(base,12500);
   }
 
-  // Marginal relief under the new regime for income just above ₹12 lakh.
-  // Relief prevents the tax increase from exceeding the amount of income above ₹12 lakh.
+  // New-regime marginal relief for taxable income just above ₹12 lakh.
+  // Relief ensures tax does not rise by more than the income above ₹12 lakh.
   let marginalRelief=0;
   if(regime==="new" && income>1200000){
     const excess=income-1200000;
-    marginalRelief=Math.max(0, Math.min(base, base-excess));
+    marginalRelief=Math.max(0,base-excess);
   }
 
   const taxAfterRebate=Math.max(0,base-rebate-marginalRelief);
@@ -480,6 +488,7 @@ function calcTax(){
   document.getElementById("taxCess").textContent=money(cess);
   document.getElementById("taxOut").textContent=money(total);
 }
+
 function calcPF(){
   const wage=num("pfWage"), rate=num("pfRate"), years=Math.max(1,num("pfYears")), annual=num("pfInterest");
   const monthly=wage*rate/100, months=years*12, r=annual/100/12;
