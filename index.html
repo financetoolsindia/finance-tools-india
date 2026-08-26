@@ -396,19 +396,33 @@ function slabTax(income,slabs){
   return tax;
 }
 function calcTax(){
-  const income=num("taxIncome"), regime=document.getElementById("taxRegime").value;
+  const income=num("taxIncome");
+  const regime=document.getElementById("taxRegime").value;
+
+  // Indicative slabs for AY 2026-27.
   const slabs=regime==="new"
     ? [[400000,0],[800000,.05],[1200000,.10],[1600000,.15],[2000000,.20],[2400000,.25],[Infinity,.30]]
     : [[250000,0],[500000,.05],[1000000,.20],[Infinity,.30]];
+
   const base=slabTax(income,slabs);
-  const rebate=regime==="new"
-    ? (income<=1200000?Math.min(base,60000):0)
-    : (income<=500000?Math.min(base,12500):0);
-  const taxable=Math.max(0,base-rebate), cess=taxable*.04;
+
+  // Section 87A rebate: new regime up to ₹12 lakh taxable income;
+  // old regime up to ₹5 lakh taxable income.
+  let rebate=0;
+  if(regime==="new" && income<=1200000){
+    rebate=Math.min(base,60000);
+  }else if(regime==="old" && income<=500000){
+    rebate=Math.min(base,12500);
+  }
+
+  const taxAfterRebate=Math.max(0,base-rebate);
+  const cess=taxAfterRebate*0.04;
+  const total=taxAfterRebate+cess;
+
   document.getElementById("taxBase").textContent=money(base);
   document.getElementById("taxRebate").textContent="− "+money(rebate);
   document.getElementById("taxCess").textContent=money(cess);
-  document.getElementById("taxOut").textContent=money(taxable+cess);
+  document.getElementById("taxOut").textContent=money(total);
 }
 function calcPF(){
   const wage=num("pfWage"), rate=num("pfRate"), years=Math.max(1,num("pfYears")), annual=num("pfInterest");
