@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="SalaryWise India - free salary, EMI, SIP and personal finance calculators for Indians.">
+<title>SalaryWise India — Know Your Money. Plan Your Future.</title>
+<link rel="icon" href="data:,">
+<style>
+:root{
+  --green:#119447; --green-dark:#087536; --ink:#102033; --muted:#5e6b78;
+  --line:#e4e9ee; --soft:#f4faf6; --white:#fff; --shadow:0 12px 35px rgba(16,32,51,.08);
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:#fff}
+a{text-decoration:none;color:inherit}.container{max-width:1180px;margin:auto;padding:0 24px}
+header{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;background:#fff;position:sticky;top:0;z-index:20}
+.nav{display:flex;align-items:center;justify-content:space-between;width:100%;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.5px}.logo-mark{width:34px;height:34px;border-radius:9px;background:var(--green);display:grid;place-items:center;color:#fff;font-weight:900}.logo span{color:var(--green)}.logo small{display:block;font-size:8px;letter-spacing:4px;margin-top:-2px;color:var(--ink)}
+nav{display:flex;gap:28px;font-size:14px}nav a:hover{color:var(--green)}
+.search{display:flex;align-items:center;border:1px solid var(--line);border-radius:24px;padding:7px 8px 7px 13px;width:220px}.search input{border:0;outline:0;width:100%;font-size:12px}.search button{border:0;background:var(--green);color:#fff;border-radius:50%;width:30px;height:30px}
+.hero{background:linear-gradient(135deg,#fff 40%,#f3fbf6);padding:76px 0 62px}.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:45px}.eyebrow{color:var(--green);font-weight:800;font-size:13px;letter-spacing:1.2px;text-transform:uppercase}
+h1{font-size:54px;line-height:1.08;letter-spacing:-2.5px;margin:12px 0 18px}h1 span{color:var(--green)}.hero p{font-size:18px;line-height:1.6;color:var(--muted);max-width:560px}.btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;border:0;border-radius:9px;padding:13px 19px;font-weight:750;cursor:pointer;box-shadow:0 8px 20px rgba(17,148,71,.18)}.btn:hover{background:var(--green-dark)}
+.trust{margin-top:26px;color:var(--muted);font-size:12px}.trust strong{color:var(--ink)}
+.hero-art{position:relative;min-height:390px}.person{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:230px;height:255px;border-radius:110px 110px 25px 25px;background:#b8e8c9}.person:before{content:"";position:absolute;width:72px;height:72px;border-radius:50%;background:#f0b88c;left:79px;top:-18px}.person:after{content:"";position:absolute;width:95px;height:34px;border-radius:50px 50px 10px 10px;background:#172b40;left:67px;top:-27px}
+.laptop{position:absolute;left:50%;bottom:15px;transform:translateX(-50%);width:250px;height:115px;background:#8997a5;border-radius:8px;box-shadow:0 14px 20px rgba(0,0,0,.12)}.laptop:after{content:"";position:absolute;left:-35px;bottom:-15px;width:320px;height:18px;background:#d8dee4;border-radius:50%}
+.card{position:absolute;background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px;box-shadow:var(--shadow)}.salary-card{top:22px;left:12px;width:170px}.saving-card{left:0;bottom:95px;width:160px}.asset-card{right:8px;top:45px;width:190px}.track-card{right:0;bottom:95px;width:175px}.card label{font-size:10px;color:var(--muted)}.card strong{display:block;font-size:20px;margin:6px 0}.mini-bar{height:6px;background:#dcefe4;border-radius:8px;overflow:hidden}.mini-bar i{display:block;width:78%;height:100%;background:var(--green)}
+section{padding:54px 0}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}.section-head h2{margin:0;font-size:28px;letter-spacing:-1px}.section-head a{color:var(--green);font-size:13px;font-weight:750}
+.tools{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.tool{border:1px solid var(--line);border-radius:13px;padding:22px 17px;min-height:170px;transition:.2s;background:#fff}.tool:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:#b9dfc7}.icon{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:21px;background:#e8f8ee;margin-bottom:15px}.tool h3{font-size:14px;margin:0 0 7px}.tool p{font-size:11px;color:var(--muted);line-height:1.45;margin:0}.arrow{color:var(--green);font-weight:800;margin-top:10px;display:block}
+.calculator{background:linear-gradient(135deg,#f3faf6,#fff);border-top:1px solid #edf3ef;border-bottom:1px solid #edf3ef}.calc-grid{display:grid;grid-template-columns:.9fr 1.25fr .9fr;gap:20px;align-items:stretch}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 8px 24px rgba(16,32,51,.05)}.panel h3{margin:0 0 18px;font-size:18px}.benefits h2{font-size:30px;margin:0 0 12px}.benefits p{color:var(--muted);line-height:1.6}.checks{list-style:none;padding:0;margin:20px 0}.checks li{margin:12px 0;font-size:13px}.checks li:before{content:"✓";display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#dff5e7;color:var(--green);font-weight:800;margin-right:9px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin-bottom:14px}.field label{display:block;font-size:11px;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;padding:12px;border:1px solid #d8e0e7;border-radius:8px;font-size:13px;outline:none;background:#fff}.field input:focus,.field select:focus{border-color:var(--green)}.result-big{font-size:31px;color:var(--green);font-weight:850;margin:8px 0}.breakdown{border-top:1px solid var(--line);margin-top:18px;padding-top:13px}.line{display:flex;justify-content:space-between;font-size:12px;padding:7px 0;color:var(--muted)}.line.total{font-weight:800;color:var(--green)}
+.articles{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.article{border:1px solid var(--line);border-radius:13px;overflow:hidden;background:#fff}.article-img{height:130px;background:linear-gradient(135deg,#e7f6ec,#c7e7d1);display:grid;place-items:center;font-size:42px}.article-body{padding:16px}.tag{font-size:9px;color:var(--green);font-weight:800}.article h3{font-size:14px;line-height:1.35;margin:8px 0}.article p{font-size:11px;color:var(--muted);line-height:1.5}.read{font-size:11px;color:var(--green);font-weight:800}
+footer{background:#0c2438;color:#fff;padding:42px 0 22px}.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:30px}.footer-title{font-weight:800;font-size:20px}.footer p,.footer a{color:#b9c6d1;font-size:12px;line-height:1.8}.footer h4{margin:0 0 10px;font-size:13px}.subscribe{display:flex;margin-top:8px}.subscribe input{min-width:0;flex:1;padding:10px;border:0;border-radius:7px 0 0 7px}.subscribe button{border:0;background:var(--green);color:#fff;border-radius:0 7px 7px 0;padding:0 13px;font-weight:700}.copyright{border-top:1px solid rgba(255,255,255,.12);margin-top:30px;padding-top:17px;display:flex;justify-content:space-between;font-size:10px;color:#93a6b5}
+@media(max-width:980px){nav{display:none}.search{width:190px}.hero-grid{grid-template-columns:1fr}.hero-art{max-width:650px;width:100%;margin:auto}.tools{grid-template-columns:repeat(2,1fr)}.calc-grid{grid-template-columns:1fr!important}.articles{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.container{padding:0 16px}.hero{padding:48px 0}.hero h1{font-size:39px}.hero p{font-size:16px}.hero-art{min-height:330px}.salary-card{left:0;top:5px}.asset-card{right:0;top:20px}.saving-card{left:5px;bottom:55px}.track-card{right:0;bottom:55px}.person{width:180px;height:210px}.person:before{left:54px}.person:after{left:43px}.laptop{width:210px}.tools,.articles{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.copyright{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="logo" href="#"><div class="logo-mark">↗</div><div>Salary<span>Wise</span><small>INDIA</small></div></a>
+    <nav>
+      <a href="#calculators">Calculators⌄</a><a href="#career">Career Tools⌄</a><a href="#guides">Money Guides</a><a href="#resources">Resources⌄</a><a href="#about">About Us</a>
+    </nav>
+    <div class="search"><input placeholder="Search tools or guides..."><button>⌕</button></div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+<div class="container hero-grid">
+  <div>
+    <div class="eyebrow">India's simple money toolkit</div>
+    <h1>Know your money.<br>Plan your <span>future.</span></h1>
+    <p>Free calculators and smart guides to help you make better financial and career decisions.</p>
+    <a class="btn" href="#calculators">Explore Calculators →</a>
+    <div class="trust"><strong>Built for Indians</strong> · Simple · Mobile friendly · Easy to understand</div>
+  </div>
+  <div class="hero-art">
+    <div class="card salary-card"><label>In-Hand Salary</label><strong>₹48,250</strong><label>/month</label><div class="mini-bar"><i></i></div></div>
+    <div class="card saving-card"><label>Monthly Savings</label><strong>₹15,000</strong><label>20% of income</label></div>
+    <div class="card asset-card"><label>Asset Allocation</label><strong>60% Equity</strong><label>30% Debt · 10% Gold</label></div>
+    <div class="card track-card"><label>Financial Freedom</label><strong>✓ On track</strong></div>
+    <div class="person"></div><div class="laptop"></div>
+  </div>
+</div>
+</section>
+
+<section id="calculators">
+<div class="container">
+<div class="section-head"><h2>Popular Calculators</h2><a href="#">View all calculators →</a></div>
+<div class="tools">
+  <a class="tool" href="#ctc"><div class="icon">₹</div><h3>CTC to In-Hand Salary</h3><p>Calculate your take-home salary after estimated deductions.</p><span class="arrow">→</span></a>
+  <a class="tool" href="#"><div class="icon">▣</div><h3>Income Tax Calculator</h3><p>Estimate your tax liability under available regimes.</p><span class="arrow">→</span></a>
+  <a class="tool" href="#"><div class="icon">⌂</div><h3>EMI Calculator</h3><p>Calculate EMI for home, car or personal loans.</p><span class="arrow">→</span></a>
+  <a class="tool" href="#"><div class="icon">↗</div><h3>SIP Calculator</h3><p>Plan SIP investments and estimate future value.</p><span class="arrow">→</span></a>
+  <a class="tool" href="#"><div class="icon">▥</div><h3>FD Calculator</h3><p>Calculate returns on your fixed deposit.</p><span class="arrow">→</span></a>
+  <a class="tool" href="#"><div class="icon">🎁</div><h3>Gratuity Calculator</h3><p>Estimate gratuity as per applicable rules.</p><span class="arrow">→</span></a>
+  <a class="tool" href="#"><div class="icon">♢</div><h3>PF Calculator</h3><p>Estimate PF maturity amount and interest.</p><span class="arrow">→</span></a>
+  <a class="tool" href="#career"><div class="icon">↗</div><h3>Salary Hike Calculator</h3><p>See how a hike changes your monthly salary.</p><span class="arrow">→</span></a>
+  <a class="tool" href="#"><div class="icon">%</div><h3>Loan Eligibility Calculator</h3><p>Check an indicative loan eligibility amount.</p><span class="arrow">→</span></a>
+  <a class="tool" href="#"><div class="icon">▭</div><h3>Credit Card Interest</h3><p>Estimate interest on unpaid credit card dues.</p><span class="arrow">→</span></a>
+</div>
+</div>
+</section>
+
+<section class="calculator" id="ctc">
+<div class="container">
+<div class="calc-grid">
+  <div class="benefits">
+    <h2>Calculate smart.<br>Decide better.</h2>
+    <p>Our first calculator gives you a quick, indicative estimate of monthly take-home pay from annual CTC.</p>
+    <ul class="checks"><li>Free to use</li><li>Mobile friendly</li><li>Simple breakdown</li><li>No sign-up required</li></ul>
+  </div>
+  <div class="panel">
+    <h3>CTC to In-Hand Salary Calculator</h3>
+    <div class="field"><label>Annual CTC (₹)</label><input id="ctcInput" type="number" value="650000" min="0"></div>
+    <div class="form-row">
+      <div class="field"><label>Location</label><select><option>Karnataka</option><option>Maharashtra</option><option>Tamil Nadu</option><option>Other</option></select></div>
+      <div class="field"><label>Monthly variable pay (₹)</label><input id="variable" type="number" value="0" min="0"></div>
+    </div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calculate()">Calculate In-Hand Salary</button>
+    <p style="font-size:10px;color:#74818d;margin:12px 0 0">Demo estimate only; actual salary depends on employer structure, PF, tax, professional tax and other deductions.</p>
+  </div>
+  <div class="panel">
+    <h3>Your Estimated In-Hand</h3>
+    <div id="result" class="result-big">₹48,250</div><div style="font-size:12px;color:#6a7784">per month</div>
+    <div class="breakdown">
+      <div class="line"><span>Annual CTC</span><span id="annual">₹6,50,000</span></div>
+      <div class="line"><span>Estimated PF</span><span id="pf">− ₹1,800</span></div>
+      <div class="line"><span>Estimated tax & deductions</span><span id="tax">− ₹3,950</span></div>
+      <div class="line total"><span>Estimated take-home</span><span id="take">₹48,250</span></div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+
+<section class="calculator" id="tools-v2">
+<div class="container">
+<div class="section-head"><h2>Smart Money Calculators</h2><a href="#calculators">Back to tools ↑</a></div>
+<div class="calc-grid" style="grid-template-columns:repeat(3,1fr)">
+  <div class="panel">
+    <h3>EMI Calculator</h3>
+    <div class="field"><label>Loan amount (₹)</label><input id="emiP" type="number" value="1000000" min="0"></div>
+    <div class="form-row"><div class="field"><label>Interest rate (% p.a.)</label><input id="emiR" type="number" value="8.5" step="0.1" min="0"></div><div class="field"><label>Tenure (years)</label><input id="emiN" type="number" value="10" min="1"></div></div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calcEMI()">Calculate EMI</button>
+    <div class="breakdown"><div class="line"><span>Monthly EMI</span><strong id="emiOut">₹12,398</strong></div><div class="line"><span>Total interest</span><span id="emiInterest">₹4,87,760</span></div><div class="line total"><span>Total payment</span><span id="emiTotal">₹14,87,760</span></div></div>
+  </div>
+
+  <div class="panel">
+    <h3>SIP Calculator</h3>
+    <div class="field"><label>Monthly investment (₹)</label><input id="sipP" type="number" value="5000" min="0"></div>
+    <div class="form-row"><div class="field"><label>Expected return (% p.a.)</label><input id="sipR" type="number" value="12" step="0.1" min="0"></div><div class="field"><label>Duration (years)</label><input id="sipN" type="number" value="10" min="1"></div></div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calcSIP()">Calculate SIP</button>
+    <div class="breakdown"><div class="line"><span>Invested</span><span id="sipInvested">₹6,00,000</span></div><div class="line"><span>Estimated gains</span><span id="sipGain">₹5,61,695</span></div><div class="line total"><span>Estimated value</span><span id="sipOut">₹11,61,695</span></div></div>
+    <p style="font-size:10px;color:#74818d">Illustration only; market returns are not guaranteed. SEBI investor calculators similarly state that investment-return calculators are illustrative.</p>
+  </div>
+
+  <div class="panel">
+    <h3>FD Calculator</h3>
+    <div class="field"><label>Deposit amount (₹)</label><input id="fdP" type="number" value="100000" min="0"></div>
+    <div class="form-row"><div class="field"><label>Interest rate (% p.a.)</label><input id="fdR" type="number" value="7" step="0.1" min="0"></div><div class="field"><label>Tenure (years)</label><input id="fdN" type="number" value="3" min="1"></div></div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calcFD()">Calculate FD</button>
+    <div class="breakdown"><div class="line"><span>Principal</span><span id="fdPrincipal">₹1,00,000</span></div><div class="line"><span>Estimated interest</span><span id="fdInterest">₹23,144</span></div><div class="line total"><span>Maturity value</span><span id="fdOut">₹1,23,144</span></div></div>
+  </div>
+</div>
+</div>
+</section>
+
+
+<section class="calculator" id="india-calculators">
+<div class="container">
+<div class="section-head"><h2>India Salary & Benefits Tools</h2><a href="#calculators">View popular tools ↑</a></div>
+<div class="calc-grid" style="grid-template-columns:repeat(3,1fr)">
+  <div class="panel">
+    <h3>Income Tax Calculator</h3>
+    <div class="field"><label>Annual taxable income (₹)</label><input id="taxIncome" type="number" value="1200000" min="0"></div>
+    <div class="field"><label>Tax regime</label><select id="taxRegime"><option value="new">New regime — AY 2026–27</option><option value="old">Old regime — under 60</option></select></div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calcTax()">Calculate Tax</button>
+    <div class="breakdown"><div class="line"><span>Income tax</span><span id="taxBase">₹0</span></div><div class="line"><span>87A rebate</span><span id="taxRebate">₹0</span></div><div class="line"><span>4% cess</span><span id="taxCess">₹0</span></div><div class="line total"><span>Estimated tax</span><span id="taxOut">₹0</span></div></div>
+    <p style="font-size:10px;color:#74818d">Illustrative calculator for a resident individual; special-rate income, surcharge, marginal relief and other complexities are excluded.</p>
+  </div>
+
+  <div class="panel">
+    <h3>PF Calculator</h3>
+    <div class="field"><label>Monthly PF wage — basic + DA (₹)</label><input id="pfWage" type="number" value="30000" min="0"></div>
+    <div class="form-row"><div class="field"><label>Employee rate (%)</label><input id="pfRate" type="number" value="12" step="0.1" min="0"></div><div class="field"><label>Years</label><input id="pfYears" type="number" value="10" min="1"></div></div>
+    <div class="field"><label>Illustrative annual interest (%)</label><input id="pfInterest" type="number" value="8.25" step="0.01" min="0"></div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calcPF()">Estimate PF</button>
+    <div class="breakdown"><div class="line"><span>Monthly employee contribution</span><span id="pfMonthly">₹3,600</span></div><div class="line"><span>Total contributions</span><span id="pfContrib">₹4,32,000</span></div><div class="line total"><span>Illustrative balance</span><span id="pfOut">₹6,28,000</span></div></div>
+    <p style="font-size:10px;color:#74818d">EPF contributions depend on applicable wages, employer rules and statutory provisions. Interest is an illustration and should not be treated as a guaranteed future rate.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Gratuity Calculator</h3>
+    <div class="field"><label>Last drawn monthly salary for gratuity (₹)</label><input id="gratSalary" type="number" value="50000" min="0"></div>
+    <div class="form-row"><div class="field"><label>Completed years</label><input id="gratYears" type="number" value="6" min="0"></div><div class="field"><label>Extra months</label><input id="gratMonths" type="number" value="7" min="0" max="11"></div></div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calcGratuity()">Calculate Gratuity</button>
+    <div class="breakdown"><div class="line"><span>Gratuity service years used</span><span id="gratService">7 years</span></div><div class="line"><span>Formula</span><span>Salary ÷ 26 × 15</span></div><div class="line total"><span>Estimated gratuity</span><span id="gratOut">₹2,01,923</span></div></div>
+    <p style="font-size:10px;color:#74818d">For the standard monthly-rated formula, a completed year plus a part over six months is counted as the next year. Eligibility and applicable wage definitions can vary by case.</p>
+  </div>
+</div>
+</div>
+</section>
+
+
+<section class="calculator" id="final-calculators">
+<div class="container">
+<div class="section-head"><h2>More Money Tools</h2><a href="#calculators">View all tools ↑</a></div>
+<div class="calc-grid" style="grid-template-columns:repeat(3,1fr)">
+  <div class="panel">
+    <h3>Salary Hike Calculator</h3>
+    <div class="field"><label>Current annual salary (₹)</label><input id="hikeSalary" type="number" value="650000" min="0"></div>
+    <div class="form-row"><div class="field"><label>Hike (%)</label><input id="hikePct" type="number" value="10" step="0.1" min="0"></div><div class="field"><label>Monthly bonus change (₹)</label><input id="hikeBonus" type="number" value="0"></div></div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calcHike()">Calculate New Salary</button>
+    <div class="breakdown"><div class="line"><span>Increase</span><span id="hikeIncrease">₹65,000</span></div><div class="line"><span>New annual salary</span><span id="hikeAnnual">₹7,15,000</span></div><div class="line total"><span>New monthly gross</span><span id="hikeMonthly">₹59,583</span></div></div>
+  </div>
+
+  <div class="panel">
+    <h3>Loan Eligibility Calculator</h3>
+    <div class="field"><label>Monthly take-home income (₹)</label><input id="loanIncome" type="number" value="50000" min="0"></div>
+    <div class="form-row"><div class="field"><label>Existing EMIs (₹)</label><input id="loanEmi" type="number" value="5000" min="0"></div><div class="field"><label>FOIR limit (%)</label><input id="loanFoir" type="number" value="50" min="1" max="90"></div></div>
+    <div class="form-row"><div class="field"><label>Rate (% p.a.)</label><input id="loanRate" type="number" value="10" step="0.1" min="0"></div><div class="field"><label>Tenure (years)</label><input id="loanYears" type="number" value="5" min="1"></div></div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calcLoan()">Estimate Eligibility</button>
+    <div class="breakdown"><div class="line"><span>Indicative EMI capacity</span><span id="loanCapacity">₹20,000</span></div><div class="line"><span>Less existing EMIs</span><span id="loanExisting">− ₹5,000</span></div><div class="line total"><span>Indicative loan amount</span><span id="loanOut">₹1,16,000</span></div></div>
+    <p style="font-size:10px;color:#74818d">This is an illustrative estimate, not a lender approval. Actual eligibility depends on lender policy, credit profile, income stability and other factors. RBI financial education materials emphasize assessing repayment capacity before borrowing.</p>
+  </div>
+
+  <div class="panel">
+    <h3>Credit Card Interest Calculator</h3>
+    <div class="field"><label>Unpaid balance (₹)</label><input id="ccBalance" type="number" value="50000" min="0"></div>
+    <div class="form-row"><div class="field"><label>APR (% p.a.)</label><input id="ccApr" type="number" value="36" step="0.1" min="0"></div><div class="field"><label>Monthly payment (₹)</label><input id="ccPayment" type="number" value="3000" min="1"></div></div>
+    <button class="btn" style="width:100%;justify-content:center" onclick="calcCC()">Estimate Payoff</button>
+    <div class="breakdown"><div class="line"><span>First-month interest</span><span id="ccInterest">₹1,500</span></div><div class="line"><span>Approx. payoff time</span><span id="ccMonths">24 months</span></div><div class="line total"><span>Approx. interest paid</span><span id="ccTotalInterest">₹22,000</span></div></div>
+    <p style="font-size:10px;color:#74818d">Illustrative only. Card issuers may calculate interest using daily balances and product-specific terms. RBI requires card issuers to disclose APR and explain how interest is calculated.</p>
+  </div>
+</div>
+</div>
+</section>
+
+<section id="guides">
+<div class="container">
+<div class="section-head"><h2>Money Guides & Articles</h2><a href="#">View all articles →</a></div>
+<div class="articles">
+  <article class="article"><div class="article-img">🏠</div><div class="article-body"><span class="tag">SAVINGS</span><h3>How Much Salary Do You Need for a ₹50 Lakh Home?</h3><p>A practical framework for estimating affordability.</p><a class="read" href="#">Read More →</a></div></article>
+  <article class="article"><div class="article-img">🌱</div><div class="article-body"><span class="tag">INVESTING</span><h3>SIP vs FD: Which Is Better for You?</h3><p>Compare return potential, risk and liquidity.</p><a class="read" href="#">Read More →</a></div></article>
+  <article class="article"><div class="article-img">🧮</div><div class="article-body"><span class="tag">TAX</span><h3>New Tax Regime vs Old Tax Regime</h3><p>Understand the key differences before choosing.</p><a class="read" href="#">Read More →</a></div></article>
+  <article class="article"><div class="article-img">🤝</div><div class="article-body"><span class="tag">CAREER</span><h3>How to Negotiate Your Salary Like a Pro</h3><p>Practical tips to improve your next offer.</p><a class="read" href="#">Read More →</a></div></article>
+</div>
+</div>
+</section>
+</main>
+
+<footer id="about">
+<div class="container">
+<div class="footer-grid">
+  <div><div class="footer-title">SalaryWise India</div><p>Simple tools. Smarter decisions.<br>Built to make money topics easier to understand.</p></div>
+  <div><h4>Quick Links</h4><a href="#calculators">Calculators</a><br><a href="#career">Career Tools</a><br><a href="#guides">Money Guides</a><br><a href="#">Resources</a></div>
+  <div><h4>Popular Tools</h4><a href="#ctc">CTC Calculator</a><br><a href="#">EMI Calculator</a><br><a href="#">SIP Calculator</a><br><a href="#">Tax Calculator</a></div>
+  <div><h4>Stay Updated</h4><p>Get useful money tips and new tools in your inbox.</p><div class="subscribe"><input placeholder="Your email"><button>Subscribe</button></div></div>
+</div>
+<div class="copyright"><span>© 2026 SalaryWise India</span><span>Privacy · Terms · Disclaimer</span></div>
+</div>
+</footer>
+
+<script>
+function money(n){return "₹"+Math.max(0,Math.round(n)).toLocaleString("en-IN")}
+function calculate(){
+  const ctc=Math.max(0,Number(document.getElementById("ctcInput").value)||0), variable=Math.max(0,Number(document.getElementById("variable").value)||0);
+  const annualBase=Math.max(0,ctc-variable*12), pf=Math.min(21600,annualBase*0.12), estimatedOther=Math.max(0,annualBase*0.035), monthly=Math.max(0,(ctc-pf-estimatedOther)/12);
+  document.getElementById("result").textContent=money(monthly);document.getElementById("take").textContent=money(monthly);document.getElementById("annual").textContent=money(ctc);document.getElementById("pf").textContent="− "+money(pf/12);document.getElementById("tax").textContent="− "+money(estimatedOther/12);
+}
+function calcEMI(){
+  const P=Math.max(0,Number(document.getElementById("emiP").value)||0),annual=Math.max(0,Number(document.getElementById("emiR").value)||0),years=Math.max(1,Number(document.getElementById("emiN").value)||1),n=years*12,r=annual/12/100,emi=r===0?P/n:P*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1),total=emi*n;
+  document.getElementById("emiOut").textContent=money(emi);document.getElementById("emiInterest").textContent=money(total-P);document.getElementById("emiTotal").textContent=money(total);
+}
+function calcSIP(){
+  const p=Math.max(0,Number(document.getElementById("sipP").value)||0),annual=Math.max(0,Number(document.getElementById("sipR").value)||0),years=Math.max(1,Number(document.getElementById("sipN").value)||1),n=years*12,r=annual/12/100,fv=r===0?p*n:p*((Math.pow(1+r,n)-1)/r)*(1+r),invested=p*n;
+  document.getElementById("sipInvested").textContent=money(invested);document.getElementById("sipGain").textContent=money(fv-invested);document.getElementById("sipOut").textContent=money(fv);
+}
+function calcFD(){
+  const P=Math.max(0,Number(document.getElementById("fdP").value)||0),annual=Math.max(0,Number(document.getElementById("fdR").value)||0),years=Math.max(1,Number(document.getElementById("fdN").value)||1),maturity=P*Math.pow(1+annual/400,4*years);
+  document.getElementById("fdPrincipal").textContent=money(P);document.getElementById("fdInterest").textContent=money(maturity-P);document.getElementById("fdOut").textContent=money(maturity);
+}
+function slabTax(income,slabs){let tax=0,prev=0;for(const [limit,rate] of slabs){if(income<=prev)break;tax+=Math.max(0,Math.min(income,limit)-prev)*rate;prev=limit;if(limit===Infinity)break}return tax}
+function calcTax(){
+  const income=Math.max(0,Number(document.getElementById("taxIncome").value)||0),regime=document.getElementById("taxRegime").value;
+  const slabs=regime==="new"?[[400000,0],[800000,.05],[1200000,.10],[1600000,.15],[2000000,.20],[2400000,.25],[Infinity,.30]]:[[250000,0],[500000,.05],[1000000,.20],[Infinity,.30]];
+  let base=slabTax(income,slabs),rebate=regime==="new"?(income<=1200000?Math.min(base,60000):0):(income<=500000?Math.min(base,12500):0),tax=Math.max(0,base-rebate),cess=tax*.04;
+  document.getElementById("taxBase").textContent=money(base);document.getElementById("taxRebate").textContent="− "+money(rebate);document.getElementById("taxCess").textContent=money(cess);document.getElementById("taxOut").textContent=money(tax+cess);
+}
+function calcPF(){
+  const wage=Math.max(0,Number(document.getElementById("pfWage").value)||0),rate=Math.max(0,Number(document.getElementById("pfRate").value)||0),years=Math.max(1,Number(document.getElementById("pfYears").value)||1),annual=Math.max(0,Number(document.getElementById("pfInterest").value)||0),monthly=wage*rate/100,months=years*12,r=annual/100/12,balance=r===0?monthly*months:monthly*((Math.pow(1+r,months)-1)/r)*(1+r);
+  document.getElementById("pfMonthly").textContent=money(monthly);document.getElementById("pfContrib").textContent=money(monthly*months);document.getElementById("pfOut").textContent=money(balance);
+}
+function calcGratuity(){
+  const salary=Math.max(0,Number(document.getElementById("gratSalary").value)||0),years=Math.max(0,Math.floor(Number(document.getElementById("gratYears").value)||0)),months=Math.max(0,Math.floor(Number(document.getElementById("gratMonths").value)||0)),service=years+(months>6?1:0),gratuity=salary/26*15*service;
+  document.getElementById("gratService").textContent=service+" year"+(service===1?"":"s");document.getElementById("gratOut").textContent=money(gratuity);
+}
+function calcHike(){
+  const s=Math.max(0,Number(document.getElementById("hikeSalary").value)||0),p=Math.max(0,Number(document.getElementById("hikePct").value)||0),bonus=Number(document.getElementById("hikeBonus").value)||0,inc=s*p/100,newS=s+inc+bonus*12;
+  document.getElementById("hikeIncrease").textContent=money(inc+bonus*12);document.getElementById("hikeAnnual").textContent=money(newS);document.getElementById("hikeMonthly").textContent=money(newS/12);
+}
+function calcLoan(){
+  const income=Math.max(0,Number(document.getElementById("loanIncome").value)||0),existing=Math.max(0,Number(document.getElementById("loanEmi").value)||0),foir=Math.min(90,Math.max(1,Number(document.getElementById("loanFoir").value)||50)),annual=Math.max(0,Number(document.getElementById("loanRate").value)||0),years=Math.max(1,Number(document.getElementById("loanYears").value)||1);
+  const capacity=income*foir/100, available=Math.max(0,capacity-existing),n=years*12,r=annual/12/100,principal=r===0?available*n:available*(1-Math.pow(1+r,-n))/r;
+  document.getElementById("loanCapacity").textContent=money(capacity);document.getElementById("loanExisting").textContent="− "+money(existing);document.getElementById("loanOut").textContent=money(principal);
+}
+function calcCC(){
+  let balance=Math.max(0,Number(document.getElementById("ccBalance").value)||0),apr=Math.max(0,Number(document.getElementById("ccApr").value)||0),payment=Math.max(1,Number(document.getElementById("ccPayment").value)||1),monthlyRate=apr/12/100,first=balance*monthlyRate,interest=0,months=0;
+  while(balance>0 && months<600){let i=balance*monthlyRate;if(payment<=i && monthlyRate>0){months=601;break}interest+=i;balance=Math.max(0,balance+i-payment);months++}
+  document.getElementById("ccInterest").textContent=money(first);document.getElementById("ccMonths").textContent=months>600?"Payment too low":"~ "+months+" months";document.getElementById("ccTotalInterest").textContent=months>600?"—":money(interest);
+}
+calculate();calcEMI();calcSIP();calcFD();calcTax();calcPF();calcGratuity();calcHike();calcLoan();calcCC();
+</script>
+</body>
+</html>
