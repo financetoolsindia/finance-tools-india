@@ -280,8 +280,8 @@ footer{background:var(--navy);color:#fff;padding:44px 0 22px}.footer-grid{displa
       <div class="field"><label>Annual taxable income (₹)</label><input id="taxIncome" type="number" value="1200000" min="0"></div>
       <div class="field"><label>Tax regime</label><select id="taxRegime"><option value="new">New regime — AY 2026–27</option><option value="old">Old regime — under 60</option></select></div>
       <button class="btn" style="width:100%" onclick="calcTax()">Calculate Tax</button>
-      <div class="breakdown"><div class="line"><span>Income tax</span><span id="taxBase">₹0</span></div><div class="line"><span>87A rebate</span><span id="taxRebate">₹0</span></div><div class="line"><span>4% cess</span><span id="taxCess">₹0</span></div><div class="line total"><span>Estimated tax</span><span id="taxOut">₹0</span></div></div>
-      <p class="note">AY 2026–27 slabs are for a resident individual under the selected regime. Special-rate income, surcharge and marginal relief are excluded.</p>
+      <div class="breakdown"><div class="line"><span>Income tax</span><span id="taxBase">₹0</span></div><div class="line"><span>87A rebate</span><span id="taxRebate">₹0</span></div><div class="line"><span>Marginal relief</span><span id="taxMarginalRelief">₹0</span></div><div class="line"><span>4% cess</span><span id="taxCess">₹0</span></div><div class="line total"><span>Estimated tax</span><span id="taxOut">₹0</span></div></div>
+      <p class="note">AY 2026–27 slabs are for a resident individual under the selected regime. New-regime 87A rebate and marginal relief are included; special-rate income and surcharge are excluded.</p>
     </div>
 
     <div class="panel" id="pf">
@@ -462,12 +462,21 @@ function calcTax(){
     rebate=Math.min(base,12500);
   }
 
-  const taxAfterRebate=Math.max(0,base-rebate);
+  // Marginal relief under the new regime for income just above ₹12 lakh.
+  // Relief prevents the tax increase from exceeding the amount of income above ₹12 lakh.
+  let marginalRelief=0;
+  if(regime==="new" && income>1200000){
+    const excess=income-1200000;
+    marginalRelief=Math.max(0, Math.min(base, base-excess));
+  }
+
+  const taxAfterRebate=Math.max(0,base-rebate-marginalRelief);
   const cess=taxAfterRebate*0.04;
   const total=taxAfterRebate+cess;
 
   document.getElementById("taxBase").textContent=money(base);
   document.getElementById("taxRebate").textContent="− "+money(rebate);
+  document.getElementById("taxMarginalRelief").textContent="− "+money(marginalRelief);
   document.getElementById("taxCess").textContent=money(cess);
   document.getElementById("taxOut").textContent=money(total);
 }
